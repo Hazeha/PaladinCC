@@ -18,22 +18,11 @@ namespace CustomClassTemplate.Objects
         private static Spell lastSpell = new Spell(string.Empty, -1, false, false);
 
         private List<Spell> spells;
-       // public string ShieldName = "";      For Gui To chose shield!
+       
 
-        //--Healing Spells--//
-        //---------------------------------------------------------------------------------------------------------Shield--//
-        public static readonly Spell Shield = new Spell("Holy Shield", 310, false, false,
-            isWanted:
-                () =>
-                //--What Parametters to take care of before casting--//
-                    Helpers.CanCast("Holy Shield") && !Me.GotAura("Holy Shield"), customAction:
-                () =>
-                {
-                    //--Custom Action - SelfCasting--//
-                    Helpers.TryBuff("Holy Shield");
-                });
+        //--Healing Spells--//        
         //----------------------------------------------------------------------------------------------------Flash Heal--//
-        public static readonly Spell FlashHeal = new Spell("Flash of Light", 320, false, false,
+        public static readonly Spell FlashHeal = new Spell("Flash of Light", 1500, false, false,
             isWanted:
                 () =>
                 //--What Parametters to take care of before casting--//
@@ -45,7 +34,7 @@ namespace CustomClassTemplate.Objects
                     Helpers.TryBuff("Flash of Light");
                 });
         //-----------------------------------------------------------------------------------------------------Holy Light--//
-        public static readonly Spell HolyLight = new Spell("Holy Light", 330, false, false,
+        public static readonly Spell HolyLight = new Spell("Holy Light", 1400, false, false,
             isWanted:
                 () =>
                 //--What Parametters to take care of before casting--//
@@ -56,7 +45,7 @@ namespace CustomClassTemplate.Objects
                     Helpers.TryBuff("Holy Light");
                 });
         //-----------------------------------------------------------------------------------------------------Holy Light--//
-        public static readonly Spell LayonCock = new Spell("Lay on Hands", 330, false, false, true,
+        public static readonly Spell LayonCock = new Spell("Lay on Hands", 1300, false, false, true,
             isWanted:
                 () =>
                 //--What Parametters to take care of before casting--//
@@ -69,22 +58,23 @@ namespace CustomClassTemplate.Objects
 
         //--Dmg Spells--//
         //-----------------------------------------------------------------------------------------------------------Seal--//
-        public static readonly Spell Seal = new Spell(CustomClassSettings.Values.WeaponEnchant, 310, false, false,
+        public static readonly Spell Seal = new Spell(CustomClassSettings.Values.WeaponEnchant, 500, false, false,
            isWanted:
                () =>
-                   //--What Parametters to take care of before casting--//
-                   Helpers.CanCast(CustomClassSettings.Values.WeaponEnchant) && !Me.GotAura(CustomClassSettings.Values.WeaponEnchant), customAction:
-               () =>
-               {
+                   //--What Parametters to take care of before casting--// 
+                   !Me.GotAura(CustomClassSettings.Values.WeaponEnchant) &&
+                   Helpers.CanCast(CustomClassSettings.Values.WeaponEnchant), customAction:
+                () =>
+                {
                     //--Custom Action - SelfCasting--//
                     Helpers.TryBuff(CustomClassSettings.Values.WeaponEnchant);
-               });
+                });  
         //-------------------------------------------------------------------------------------------------------Judgement--//
-        public static readonly Spell Judgement = new Spell("Judgement", 750, false, true, true,
+        public static readonly Spell Judgement = new Spell("Judgement", 600, false, true, true,
             isWanted:
                 () =>
                 //--What Parametters to take care of before casting--//
-                    Helpers.CanCast("Judgement") && !Me.GotAura(CustomClassSettings.Values.WeaponEnchant)
+                    Helpers.CanCast("Judgement") && Me.GotAura(CustomClassSettings.Values.WeaponEnchant)
                  && Me.ManaPercent >= 10, 
             customAction:
                 () =>
@@ -93,7 +83,7 @@ namespace CustomClassTemplate.Objects
                 });
         
         //------------------------------------------------------------------------------------------------------Earth Shock--//
-        public static readonly Spell Consecration = new Spell("Consecration", 700, false, true, true,
+        public static readonly Spell Consecration = new Spell("Consecration", 400, false, true, true,
             isWanted:
                 () =>
                 //--What Parametters to take care of before casting--//
@@ -104,7 +94,7 @@ namespace CustomClassTemplate.Objects
                     Helpers.TryCast("Consecration");                    
                 });
         //-------------------------------------------------------------------------------------------------------Holy Shield--//
-        public static readonly Spell HolyShield = new Spell("Holy Shield", 600, false, true, true, 
+        public static readonly Spell HolyShield = new Spell("Holy Shield", 200, false, true, true, 
             isWanted:
                 () =>
                 //--What Parametters to take care of before casting--//
@@ -115,7 +105,7 @@ namespace CustomClassTemplate.Objects
                     Helpers.TryBuff("Holy Shield");
                 });
         //--------------------------------------------------------------------------------------------------Hammer of Justice--//
-        public static readonly Spell HammerofJustice = new Spell("Hammer of Justice", 650, false, true, true,
+        public static readonly Spell HammerofJustice = new Spell("Hammer of Justice", 300, false, true, true,
            isWanted:
                () =>
                //--What Parametters to take care of before casting--//                   
@@ -124,8 +114,8 @@ namespace CustomClassTemplate.Objects
                 {                    
                         Helpers.TryCast("Hammer of Justice");                                
                 });
-        //---------------------------------------------------------------------------------------------------Stoneclaw Totem--//
-        public static readonly Spell HammerofWrath = new Spell("Hammer of Wrath", 150, false, true, true,
+        //---------------------------------------------------------------------------------------------------Hammer of Wrath--//
+        public static readonly Spell HammerofWrath = new Spell("Hammer of Wrath", 100, false, true, true,
            isWanted:
                () =>
                    //--What Parametters to take care of before casting--//
@@ -135,24 +125,24 @@ namespace CustomClassTemplate.Objects
                 {
                     Helpers.TryCast("Hammer of Wrath");
                 });
-        //---------------------------------------------------------------------------------------------------Stoneclaw Totem--//
-        public static readonly Spell Buff = new Spell(CustomClassSettings.Values.Buff, 310, true, false,
+        //---------------------------------------------------------------------------------------------------Blesseing Buff--//
+        public static readonly Spell Buff = new Spell(CustomClassSettings.Values.Buff, 1200, true, false,
           isWanted:
               () =>
                   //--What Parametters to take care of before casting--//
-                  Helpers.CanCast(CustomClassSettings.Values.Buff) && !Me.GotAura(CustomClassSettings.Values.Buff), customAction:
+                  Helpers.CanCast(CustomClassSettings.Values.Buff) && !Me.GotAura(CustomClassSettings.Values.Buff));
+        //---------------------------------------------------------------------------------------------------------Aura Buff--//
+        public static readonly Spell BuffAura = new Spell(CustomClassSettings.Values.Aura, 1100, true, false,
+          isWanted:
               () =>
-              {
-                   //--Custom Action - SelfCasting--//
-                   Helpers.TryBuff(CustomClassSettings.Values.Buff);
-              });
+                  //--What Parametters to take care of before casting--//
+                  Helpers.CanCast(CustomClassSettings.Values.Aura) && !Me.GotAura(CustomClassSettings.Values.Aura));
 
         //--If No Mana--//
         //--------------------------------------------------------------------------------------------------------Shoot Wand--//
-        public static readonly Spell Attack = new Spell("Attack", 50, false, true, true, false,
-            () => (!Helpers.CanCast("Lightning Bolt") && !Helpers.CanCast("Earth Shock") && !Helpers.CanCast("Flame Shock")) || Me.ManaPercent <= 15 && Helpers.CanCast("Attack"), customAction:
-                () =>
-                {   
+        public static readonly Spell Attack = new Spell("Attack", 1000, false, true, true, false,
+            () => Helpers.CanCast("Attack"), customAction:
+                () =>                {   
                     ZzukBot.Game.Statics.Spell.Instance.Attack();
                 });
 

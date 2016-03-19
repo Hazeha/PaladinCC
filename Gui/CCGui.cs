@@ -21,6 +21,7 @@ namespace CustomClassTemplate.Gui
             CustomClassSettings.Values.RangedAttackRange = (int)castNud.Value;
             CustomClassSettings.Values.WeaponEnchant = cbWeaponEnh.Text;
             CustomClassSettings.Values.Buff = cbBuff.Text;
+            CustomClassSettings.Values.Aura = cbAura.Text;
             CustomClassSettings.Values.Save();
         }
 
@@ -29,6 +30,7 @@ namespace CustomClassTemplate.Gui
             CustomClassSettings.Values.Load();
             cbWeaponEnh.Text = CustomClassSettings.Values.WeaponEnchant;
             cbBuff.Text = CustomClassSettings.Values.Buff;
+            cbAura.Text = CustomClassSettings.Values.Aura;
             drinkTb.Text = CustomClassSettings.Values.DrinkName;
             foodTb.Text = CustomClassSettings.Values.FoodName;
             meleeNud.Value = CustomClassSettings.Values.MeleeAttackRange;

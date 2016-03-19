@@ -67,6 +67,8 @@ namespace CustomClassTemplate.Objects
             get { return this.isWanted == null || this.isWanted.Invoke(); }
         }
 
+        public static object Instance { get; internal set; }
+
         public void Cast()
         {
             if (customAction == null)

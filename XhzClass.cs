@@ -10,6 +10,7 @@ using ZzukBot.ExtensionFramework.Classes;
 using ZzukBot.Game.Statics;
 using ZzukBot.Mem;
 using ZzukBot.Objects;
+using ZzukBot.ExtensionFramework;
 
 // XhzPriest - Credits to z0mg and Emu
 
@@ -24,6 +25,8 @@ namespace CustomClassTemplate
         //-------------------------------The WoW class the CustomClass is designed for-------------------------------------------//
         public override Enums.ClassId Class => Enums.ClassId.Paladin;
         public bool searing = false;
+        private object XhzPaladinSettings;
+
         //-------------------------------Should be called when the CC is loaded--------------------------------------------------//
         public override bool Load()
         {
@@ -49,40 +52,44 @@ namespace CustomClassTemplate
         }
         //-------------------------------Should be called when the botbase is pulling an unit-------------------------------------//
         public override void OnPull()
-        {
-            
-            
+        {                   
+            try
+            {
                 WoWUnit targetUnit = ObjectManager.Instance.Target;
+                if (targetUnit == null) return;
                 var damageSpells = this.spellbook.GetDamageSpells();
-                if (targetUnit == null) return;              
-                                
-                    foreach (var spell in damageSpells)
+                ZzukBot.Game.Statics.Spell.Instance.Attack();
+
+
+                foreach (var spell in damageSpells)
+                {
+                    if (spell.IsWanted)
                     {
-                        if (spell.IsWanted)
-                        {                         
-                            spell.Cast();
-                            spellbook.UpdateLastSpell(spell);
+                        spell.Cast();
+                        spellbook.UpdateLastSpell(spell);
                         break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
 
-                        }
-                    
-                   }
-                
-
-           
-        }
+            }
+                      
+       }
         //-------------------------------Should be called when the botbase is fighting an unit------------------------------------//
         public override void OnFight()
         {
             try
             {
                 WoWUnit targetUnit = ObjectManager.Instance.Target;
-                if (targetUnit == null) return;				
-				 
+                if (targetUnit == null) return;					 
                 var damageSpells = this.spellbook.GetDamageSpells();
                
+
+
                 foreach (var spell in damageSpells)
-                {
+                {                    
                     if (spell.IsWanted)
                     {
                         spell.Cast();
@@ -140,13 +147,7 @@ namespace CustomClassTemplate
                         spell.Cast();
                         return false;
                     }
-                }
-
-                if (!ObjectManager.Instance.Player.IsMainhandEnchanted())
-                {
-                    TryCast(CustomClassSettings.Values.WeaponEnchant);          
-                    return false;
-                }                
+                }                               
             }
             catch (Exception e)
             {
@@ -166,7 +167,7 @@ namespace CustomClassTemplate
         //-------------------------------The author of the CC---------------------------------------------------------------------//
         public override string Author => "z0mg - Xhz";
         //-------------------------------The version of the CC--------------------------------------------------------------------//
-        public override int Version => 2;
+        public override int Version => 1;
         //-------------------------------The current combat distance--------------------------------------------------------------//
         public override float CombatDistance => Data.Statics.CombatDistance;
 

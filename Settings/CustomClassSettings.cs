@@ -15,6 +15,7 @@ namespace CustomClassTemplate.Settings
         public string FoodName = "";
         public string DrinkName = "";
         public string Buff = "";
+        public string Aura = "";
         public string WeaponEnchant = "";
 
         private CustomClassSettings()

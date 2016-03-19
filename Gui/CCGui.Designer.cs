@@ -42,6 +42,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cbBuff = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbAura = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.meleeNud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.castNud)).BeginInit();
             this.SuspendLayout();
@@ -142,7 +144,7 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(23, 202);
+            this.saveBtn.Location = new System.Drawing.Point(21, 251);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 8;
@@ -152,7 +154,7 @@
             // 
             // reloadBtn
             // 
-            this.reloadBtn.Location = new System.Drawing.Point(104, 202);
+            this.reloadBtn.Location = new System.Drawing.Point(102, 251);
             this.reloadBtn.Name = "reloadBtn";
             this.reloadBtn.Size = new System.Drawing.Size(75, 23);
             this.reloadBtn.TabIndex = 9;
@@ -166,7 +168,7 @@
             this.cbWeaponEnh.Items.AddRange(new object[] {
             "Seal of Righteousness",
             "Seal of Light",
-            "Seal of Crusader",
+            "Seal of the Crusader",
             "Seal of Justice",
             "Seal of Wisdom"});
             this.cbWeaponEnh.Location = new System.Drawing.Point(14, 135);
@@ -207,11 +209,37 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "Blessing Buff";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 199);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Aura Buff";
+            // 
+            // cbAura
+            // 
+            this.cbAura.FormattingEnabled = true;
+            this.cbAura.Items.AddRange(new object[] {
+            "Devotion Aura",
+            "Retribution Aura",
+            "Concentration Aura\t",
+            "Shadow Resistance Aura",
+            "Frost Resistance Aura",
+            "Fire Resistance Aura"});
+            this.cbAura.Location = new System.Drawing.Point(15, 215);
+            this.cbAura.Name = "cbAura";
+            this.cbAura.Size = new System.Drawing.Size(172, 21);
+            this.cbAura.TabIndex = 16;
+            // 
             // CCGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(203, 243);
+            this.ClientSize = new System.Drawing.Size(205, 286);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cbAura);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbBuff);
             this.Controls.Add(this.label1);
@@ -253,5 +281,7 @@
         public System.Windows.Forms.ComboBox cbWeaponEnh;
         public System.Windows.Forms.ComboBox cbBuff;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.ComboBox cbAura;
     }
 }

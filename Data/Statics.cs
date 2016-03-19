@@ -8,7 +8,7 @@ namespace CustomClassTemplate.Data
 {
     internal static class Statics
     {
-        internal static volatile float CombatDistance = 30f;
-        internal static volatile string SettingsName = "XhzPriestSettings";
+        internal static volatile float CombatDistance = 4f;
+        internal static volatile string SettingsName = "XhzPaladinSettings";
     }
 }
