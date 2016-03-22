@@ -22,43 +22,38 @@ namespace CustomClassTemplate.Objects
 
         //--Healing Spells--//        
         //----------------------------------------------------------------------------------------------------Flash Heal--//
-        public static readonly Spell FlashHeal = new Spell("Flash of Light", 1500, false, false,
+        public static readonly Spell FlashHeal = new Spell("Flash of Light", 1400, false, false,
             isWanted:
                 () =>
                 //--What Parametters to take care of before casting--//
                     Me.HealthPercent <= 60 &&
-                    Helpers.CanCast("Flash of Light"), customAction:
+                    Helpers.CanCast("Flash of Light"),
+            customAction:
                 () =>
                 {
-                    //--Custom Action - SelfCasting--//
-                    Helpers.TryBuff("Flash of Light");
+                    Helpers.TryCast("Flash of Light");
                 });
         //-----------------------------------------------------------------------------------------------------Holy Light--//
-        public static readonly Spell HolyLight = new Spell("Holy Light", 1400, false, false,
+        public static readonly Spell HolyLight = new Spell("Holy Light", 1500, false, false,
             isWanted:
                 () =>
                 //--What Parametters to take care of before casting--//
-                    Helpers.CanCast("Holy Light") && Me.HealthPercent <= 40, customAction:
+                    Helpers.CanCast("Holy Light") && Me.HealthPercent <= 40,
+            customAction:
                 () =>
                 {
-                    //--Custom Action - SelfCasting--//
-                    Helpers.TryBuff("Holy Light");
+                    Helpers.TryCast("Holy Light");
                 });
         //-----------------------------------------------------------------------------------------------------Holy Light--//
-        public static readonly Spell LayonCock = new Spell("Lay on Hands", 1300, false, false, true,
+        public static readonly Spell LayonCock = new Spell("Lay on Hands", 700, false, false, true,
             isWanted:
                 () =>
                 //--What Parametters to take care of before casting--//
-                    Helpers.CanCast("Lay on Hands") && Me.HealthPercent <= 20, customAction:
-                () =>
-                {
-                    //--Custom Action - SelfCasting--//
-                    Helpers.TryBuff("Lay on Hands");
-                });
+                    Helpers.CanCast("Lay on Hands") && Me.HealthPercent <= 20);
 
         //--Dmg Spells--//
         //-----------------------------------------------------------------------------------------------------------Seal--//
-        public static readonly Spell Seal = new Spell(CustomClassSettings.Values.WeaponEnchant, 500, false, false,
+        public static readonly Spell Seal = new Spell(CustomClassSettings.Values.WeaponEnchant, 1000, false, false,
            isWanted:
                () =>
                    //--What Parametters to take care of before casting--// 
@@ -67,7 +62,7 @@ namespace CustomClassTemplate.Objects
                 () =>
                 {
                     //--Custom Action - SelfCasting--//
-                    Helpers.TryBuff(CustomClassSettings.Values.WeaponEnchant);
+                    Helpers.ShouldBuffSelf(CustomClassSettings.Values.WeaponEnchant);
                 });  
         //-------------------------------------------------------------------------------------------------------Judgement--//
         public static readonly Spell Judgement = new Spell("Judgement", 600, false, true, true,
@@ -130,13 +125,23 @@ namespace CustomClassTemplate.Objects
           isWanted:
               () =>
                   //--What Parametters to take care of before casting--//
-                  Helpers.CanCast(CustomClassSettings.Values.Buff) && !Me.GotAura(CustomClassSettings.Values.Buff));
+                  Helpers.CanCast(CustomClassSettings.Values.Buff) && !Me.GotAura(CustomClassSettings.Values.Buff), customAction:
+                () =>
+                {
+                    //--Custom Action - SelfCasting--//
+                    Helpers.ShouldBuffSelf(CustomClassSettings.Values.Buff);
+                });
         //---------------------------------------------------------------------------------------------------------Aura Buff--//
         public static readonly Spell BuffAura = new Spell(CustomClassSettings.Values.Aura, 1100, true, false,
           isWanted:
               () =>
                   //--What Parametters to take care of before casting--//
-                  Helpers.CanCast(CustomClassSettings.Values.Aura) && !Me.GotAura(CustomClassSettings.Values.Aura));
+                  Helpers.CanCast(CustomClassSettings.Values.Aura) && !Me.GotAura(CustomClassSettings.Values.Aura), customAction:
+                () =>
+                {
+                    //--Custom Action - SelfCasting--//
+                    Helpers.ShouldBuffSelf(CustomClassSettings.Values.Aura);
+                });
 
         //--If No Mana--//
         //--------------------------------------------------------------------------------------------------------Shoot Wand--//
